@@ -1,6 +1,11 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useParams } from 'react-router';
+
+import * as productService from '../../services/productService';
 
 const ProductForm = (props) => {
+    const { productId } = useParams();
+    console.log(productId);
     const [formData, setFormData] = useState({
         productName: '',
         imageLink: '',
@@ -15,11 +20,32 @@ const ProductForm = (props) => {
 
     const handleSubmit = (evt) => {
         evt.preventDefault();
-        props.handleAddProduct(formData);
+        if (productId) {
+            props.handleUpdateProduct(productId, formData);
+        } else {
+            props.handleAddProduct(formData);
+        }
     };
+
+    useEffect(() => {
+        const fetchProduct = async () => {
+            const productData = await productService.show(productId);
+            setFormData(productData);
+        };
+        if (productId) fetchProduct();
+
+        return () => setFormData({
+            productName: '',
+            imageLink: '',
+            description: '',
+            price: '',
+            category: 'Electronics'
+        });
+    }, [productId]);
 
     return (
         <main>
+            <h1>{productId ? 'Edit Product' : 'Add New Product'}</h1>
             <form onSubmit={handleSubmit}>
                 <label htmlFor='productName-input'>Product Name</label>
                 <input
@@ -69,7 +95,7 @@ const ProductForm = (props) => {
                     <option value='Movies'>Movies</option>
                     <option value='Appliances'>Appliances</option>
                     <option value='Food'>Food</option>
-                </select>    
+                </select>
                 <button type='submit'>SUBMIT</button>
             </form>
         </main>

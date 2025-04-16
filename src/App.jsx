@@ -25,11 +25,23 @@ const App = () => {
     navigate('/products');
   };
 
+  const handleDeleteProduct = async (productId) => {
+    const deletedProduct = await productService.deleteProduct(productId);
+    setProducts(products.filter((product) => product._id !== deletedProduct._id));
+    navigate('/products');
+  };
+
+  const handleUpdateProduct = async (productId, productFormData) => {
+    const updatedProduct = await productService.update(productId, productFormData);
+    setProducts(products.map((product) => (productId === product._id ? updatedProduct : product)));
+    navigate(`/products/${productId}`);
+  };
+
   useEffect(() => {
     const fetchAllProducts = async () => {
-      const productData = await productService.index();
+      const productsData = await productService.index();
 
-      setProducts(productData);
+      setProducts(productsData);
     };
     if (user) fetchAllProducts();
   }, [user]);
@@ -53,6 +65,14 @@ const App = () => {
             <Route
               path='products/new'
               element={<ProductForm handleAddProduct={handleAddProduct} />}
+            />
+            <Route
+              path='/products/:productId/edit'
+              element={<ProductForm handleUpdateProduct={handleUpdateProduct} />}
+            />
+            <Route
+              path='/products/:productId'
+              element={<ProductDetails handleDeleteProduct={handleDeleteProduct} />}
             />
           </>
         ) : (

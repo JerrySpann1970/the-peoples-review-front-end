@@ -1,11 +1,18 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
+import ReviewForm from '../ReviewForm/ReviewForm';
 import * as productService from '../../services/productService';
-import { useParams } from 'react-router';
+import { useParams, Link } from 'react-router';
+import { UserContext } from '../../contexts/UserContext';
 
-const ProductDetails = () => {
+const ProductDetails = (props) => {
     const [product, setProduct] = useState(null);
     const { productId } = useParams();
-    console.log('productId', productId);
+    const { user } = useContext(UserContext);
+
+    const handleAddReview = async (reviewFormData) => {
+        const newReview = await productService.createReview(productId, reviewFormData);
+        setProduct({ ...product, reviews: [...product.reviews, newReview] });
+    };
 
     useEffect(() => {
         const fetchProduct = async () => {
@@ -31,10 +38,21 @@ const ProductDetails = () => {
                         {`${product.author.username} added on
                         ${new Date(product.createdAt).toLocaleDateString()}`}
                     </p>
+                    {product.author._id === user._id && (
+                        <>
+                            <Link to={`/products/${productId}/edit`}>Edit</Link>
+
+                            <button onClick={() => props.handleDeleteProduct(productId)}>
+                                Delete
+                            </button>
+                        </>
+                    )}
                 </header>
             </section>
             <section>
                 <h2>Reviews</h2>
+                {/* Make use of the ReviewForm component */}
+                <ReviewForm handleAddReview={handleAddReview} />
 
                 {!product.reviews.length && <p>There are no reviews.</p>}
 

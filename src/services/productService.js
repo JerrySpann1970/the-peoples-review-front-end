@@ -38,8 +38,57 @@ const create = async (productFormData) => {
     }
 };
 
+const createReview = async (productId, reviewFormData) => {
+    try {
+        const res = await fetch(`${BASE_URL}/${productId}/reviews`, {
+            method: 'POST',
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`,
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(reviewFormData),
+        });
+        return res.json();
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+const deleteProduct = async (productId) => {
+    try {
+        const res = await fetch(`${BASE_URL}/${productId}`, {
+            method: 'DELETE',
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`,
+            },
+        });
+        return res.json();
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+async function update(productId, productFormData) {
+    try {
+        const res = await fetch(`${BASE_URL}/${productId}`, {
+            method: 'PUT',
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`,
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(productFormData),
+        });
+        return res.json();
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 export {
     index,
     show,
     create,
+    createReview,
+    deleteProduct,
+    update,
 };
