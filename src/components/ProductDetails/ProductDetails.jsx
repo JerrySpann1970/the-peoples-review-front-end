@@ -15,7 +15,7 @@ const ProductDetails = () => {
         fetchProduct();
     }, [productId]);
 
-    // Verify the hoot state is set correctly:
+    // Verify the product state is set correctly:
     console.log('product state:', product);
 
     if (!product) return <main>Loading...</main>;
@@ -26,7 +26,7 @@ const ProductDetails = () => {
                 <header>
                     <p>{product.category.toUpperCase()}</p>
                     <h1>{product.productName}</h1>
-                    <img>{product.imageLink}</img>
+                    
                     <p>
                         {`${product.author.username} added on
                         ${new Date(product.createdAt).toLocaleDateString()}`}
@@ -35,6 +35,20 @@ const ProductDetails = () => {
             </section>
             <section>
                 <h2>Reviews</h2>
+
+                {!product.reviews.length && <p>There are no reviews.</p>}
+
+                {product.reviews.map((review) => (
+                    <article key={review._id}>
+                        <header>
+                            <p>
+                                {`${review.author.username} posted on
+                                ${new Date(review.createdAt).toLocaleDateString()}`}
+                            </p>
+                        </header>
+                        <p>{review.text}</p>
+                    </article>
+                ))}
             </section>
         </main>
     );

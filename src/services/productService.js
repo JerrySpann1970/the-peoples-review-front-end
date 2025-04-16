@@ -13,16 +13,33 @@ const index = async () => {
 
 const show = async (productId) => {
     try {
-      const res = await fetch(`${BASE_URL}/${productId}`, {
-        headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
-      });
-      return res.json();
+        const res = await fetch(`${BASE_URL}/${productId}`, {
+            headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+        });
+        return res.json();
     } catch (error) {
-      console.log(error);
+        console.log(error);
     }
-  };
+};
+
+const create = async (productFormData) => {
+    try {
+        const res = await fetch(BASE_URL, {
+            method: 'POST',
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`,
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(productFormData),
+        });
+        return res.json();
+    } catch (error) {
+        console.log(error);
+    }
+};
 
 export {
     index,
     show,
+    create,
 };
