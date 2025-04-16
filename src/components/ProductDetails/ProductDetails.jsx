@@ -33,7 +33,9 @@ const ProductDetails = (props) => {
                 <header>
                     <p>{product.category.toUpperCase()}</p>
                     <h1>{product.productName}</h1>
-                    
+                    <img src={product.imageLink} alt={product.productName} />
+                    <p>{product.description}</p>
+                    <h1>${product.price}</h1>
                     <p>
                         {`${product.author.username} added on
                         ${new Date(product.createdAt).toLocaleDateString()}`}

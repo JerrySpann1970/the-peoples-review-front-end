@@ -13,8 +13,8 @@ const ProductList = (props) => {
                                 ${new Date(product.createdAt).toLocaleDateString()}`}
                             </p>
                         </header>
-                    <p>{product.description}</p>
-                    <p>{product.price}</p>
+                        <img src={product.imageLink} alt={product.productName} />
+                        <p>{product.price}</p>
                     </article>
                 </Link>
             ))}

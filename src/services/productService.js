@@ -68,7 +68,7 @@ const deleteProduct = async (productId) => {
     }
 };
 
-async function update(productId, productFormData) {
+async function updateProduct(productId, productFormData) {
     try {
         const res = await fetch(`${BASE_URL}/${productId}`, {
             method: 'PUT',
@@ -90,5 +90,5 @@ export {
     create,
     createReview,
     deleteProduct,
-    update,
+    updateProduct,
 };

@@ -32,7 +32,7 @@ const App = () => {
   };
 
   const handleUpdateProduct = async (productId, productFormData) => {
-    const updatedProduct = await productService.update(productId, productFormData);
+    const updatedProduct = await productService.updateProduct(productId, productFormData);
     setProducts(products.map((product) => (productId === product._id ? updatedProduct : product)));
     navigate(`/products/${productId}`);
   };
@@ -57,10 +57,6 @@ const App = () => {
             <Route
               path='/products'
               element={<ProductList products={products} />}
-            />
-            <Route
-              path='/products/:productId'
-              element={<ProductDetails />}
             />
             <Route
               path='products/new'
