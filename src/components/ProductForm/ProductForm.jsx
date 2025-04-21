@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router';
 
 import * as productService from '../../services/productService';
+import styles from './ProductForm.module.css'
 
 const ProductForm = (props) => {
     const { productId } = useParams();
@@ -44,7 +45,7 @@ const ProductForm = (props) => {
     }, [productId]);
 
     return (
-        <main>
+        <main className={styles.container}>
             <h1>{productId ? 'Edit Product' : 'Add New Product'}</h1>
             <form onSubmit={handleSubmit}>
                 <label htmlFor='productName-input'>Product Name</label>

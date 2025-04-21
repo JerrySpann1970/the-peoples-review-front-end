@@ -3,6 +3,8 @@ import ReviewForm from '../ReviewForm/ReviewForm';
 import * as productService from '../../services/productService';
 import { useParams, Link } from 'react-router';
 import { UserContext } from '../../contexts/UserContext';
+import styles from './ProductDetails.module.css';
+import Loading from '../Loading/Loading';
 
 const ProductDetails = (props) => {
     const [product, setProduct] = useState(null);
@@ -25,10 +27,10 @@ const ProductDetails = (props) => {
     // Verify the product state is set correctly:
     console.log('product state:', product);
 
-    if (!product) return <main>Loading...</main>;
+    if (!product) return <Loading />
 
     return (
-        <main>
+        <main className={styles.container}>
             <section>
                 <header>
                     <p>{product.category.toUpperCase()}</p>
@@ -36,19 +38,21 @@ const ProductDetails = (props) => {
                     <img src={product.imageLink} alt={product.productName} />
                     <p>{product.description}</p>
                     <h1>${product.price}</h1>
-                    <p>
-                        {`${product.author.username} added on
-                        ${new Date(product.createdAt).toLocaleDateString()}`}
-                    </p>
-                    {product.author._id === user._id && (
-                        <>
-                            <Link to={`/products/${productId}/edit`}>Edit</Link>
+                    <div>
+                        <p>
+                            {`${product.author.username.toUpperCase()} added on
+                            ${new Date(product.createdAt).toLocaleDateString()}`}
+                        </p>
+                        {product.author._id === user._id && (
+                            <>
+                                <Link to={`/products/${productId}/edit`}>Edit</Link>
 
-                            <button onClick={() => props.handleDeleteProduct(productId)}>
-                                Delete
-                            </button>
-                        </>
-                    )}
+                                <button onClick={() => props.handleDeleteProduct(productId)}>
+                                    Delete
+                                </button>
+                            </>
+                        )}
+                    </div>
                 </header>
             </section>
             <section>

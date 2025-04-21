@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import styles from './ReviewForm.module.css'
 
 const ReviewForm = (props) => {
   const [formData, setFormData] = useState({ text: '' });
@@ -14,18 +15,20 @@ const ReviewForm = (props) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label htmlFor='text-input'>Your review:</label>
-      <textarea
-        required
-        type='text'
-        name='text'
-        id='text-input'
-        value={formData.text}
-        onChange={handleChange}
-      />
-      <button type='submit'>SUBMIT REVIEW</button>
-    </form>
+    <main className={styles.container}>
+      <form onSubmit={handleSubmit}>
+        <label htmlFor='text-input'>Your review:</label>
+        <textarea
+          required
+          type='text'
+          name='text'
+          id='text-input'
+          value={formData.text}
+          onChange={handleChange}
+        />
+        <button type='submit'>SUBMIT REVIEW</button>
+      </form>
+    </main>
   );
 };
 
