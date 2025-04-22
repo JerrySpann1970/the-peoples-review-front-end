@@ -1,19 +1,53 @@
-# React JWT Auth Template
+# The Peopls Review - Frontend
 
-## About
+<img src="src/assets/images/logo.jpg" alt="The Peoples Review Logo" width="200"/>
 
-This repo is a React JWT Auth template meant to be paired with a back-end app utilizing JWT tokens.
+## Table of Contents
+- [Overview](#overview)
+- [Features](#features)
+- [Technologies Used](#technologies-used)
+- [Screenshots](#screenshots)
+- [Next Steps](#next-steps)
+- [Team](#team)
 
-## Getting started
+## Overview
+Not everyone makes purchases at Walmart or Amazon. That's why we're
+building the Peoples Review, an open and inclusive place for shoppers
+to share their products, and their honest and open opinion about them.
+We provide a platform and the people share their purchases without
+having to log in to numerous e-commerce sites.  All the reviews in one
+place is the Peoples Review.
 
-Fork and clone this repository to your local machine.
+## Features
+- **Add Your Own Products**: This app allows the user to post and review their own products
+- **User Authentication**: Secure sign-up, login, and logout functionality
+- **Edit and Delete Products and Reviews**: User can edit and delete product and reviews
+- **See Other Peoples Reviews and Products**: User can see other peoples reviews and respond with their own review
+- **Other Users Reviews Are Read Only**: I can not alter anther users review, but can respond to it
 
-After moving into the cloned directory, run `npm i` to download the dependencies.
+## Technologies Used
 
-Create a `.env` file in the root of the project and add the following:
+- React
+- React Router
+- Vite
+- Node.js (v16 or higher)
+- npm
 
-```plaintext
-VITE_BACK_END_SERVER_URL=http://localhost:3000
-```
+## Screenshots
 
-Start the app with `npm run dev`.
+![Home Page](src/assets/images/screenshots/imageA.png)
+![Product Listing](src/assets/images/screenshots/imageB.png)
+![Sign In](src/assets/images/screenshots/imageC.png)
+![Sign Up](src/assets/images/screenshots/imageD.png)
+
+## Next Steps
+
+- Add the ability to sort reviews by catagory
+- Add the ability to search for product
+- Add a product API from Best Buy, Walmart, and Amazon
+
+## Team
+
+- Jerry Spann
+
+## Deployment
