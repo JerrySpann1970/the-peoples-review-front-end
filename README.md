@@ -52,4 +52,4 @@ place is the Peoples Review.
 
 ## Deployment
 
-![Deployment](https://fascinating-beijinho-8baa82.netlify.app/)
+[Deployment](https://fascinating-beijinho-8baa82.netlify.app/)
